@@ -1,0 +1,32 @@
+name: Monero Miner
+type: sw.application
+joinable: false
+description: >-
+  Mine Monero ($XMR) using Raspberry Pi 4
+post-provisioning: >-
+  ## Usage instructions
+  **Application download**
+  
+  **Usage**
+  Add your monero wallet address using ENV variables from balenaCloud dashboard
+
+assets:
+  repository:
+    type: blob.asset
+    data:
+      url: 'https://github.com/iayanpahwa/monero-miner'
+  logo:
+    type: blob.asset
+    data:
+      url: >-
+        https://raw.githubusercontent.com/iayanpahwa/monero-miner/master/assets/logo.png
+data:
+  applicationEnvironmentVariables:
+    - WALLET_ADDRESS: '' 
+    - MINER_POOL: 'xmr.2miners.com:2222'
+    
+  defaultDeviceType: raspberrypi4-64
+  supportedDeviceTypes:
+    - raspberrypi4-64
+
+

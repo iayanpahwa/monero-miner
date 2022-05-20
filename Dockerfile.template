@@ -1,0 +1,43 @@
+###
+# Build 
+###
+
+FROM balenalib/%%BALENA_MACHINE_NAME%%:buster-build as build
+
+WORKDIR /usr/src/app
+
+RUN apt-get update \
+    && apt-get install -yq \
+    cmake \
+    libuv1-dev \
+    libhwloc-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/xmrig/xmrig.git
+RUN mkdir xmrig/build
+WORKDIR xmrig/build
+RUN cmake ..
+RUN make -j$(nproc)
+
+
+###
+# Runtime
+###
+
+FROM balenalib/%%BALENA_MACHINE_NAME%%:buster-run
+
+RUN apt-get update \
+    && apt-get install -yq \    
+    libuv1-dev \
+    libssl-dev \
+    libhwloc-dev 
+
+ENV WALLET_ADDRESS=''
+ENV MINER_POOL='xmr.2miners.com:2222'
+
+WORKDIR /usr/src/app
+COPY --from=build /usr/src/app/xmrig/build/xmrig /usr/local/bin
+COPY start.sh start.sh
+
+CMD ["/bin/bash", "start.sh"]
