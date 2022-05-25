@@ -2,13 +2,25 @@ name: Monero Miner
 type: sw.application
 joinable: false
 description: >-
-  Mine Monero ($XMR) using Raspberry Pi 4
+  Monero-Miner for Single board computers like Raspberry Pi, powered by [balena](https://balena.io)
+
 post-provisioning: >-
   ## Usage instructions
   **Application download**
-  
+
+  Once you power up your device you'll need to allow some time for it to
+  download the application, this typically takes 3-5 minutes but it can take
+  more depending on your internet connection and what device you are using.
+
   **Usage**
-  Add your monero wallet address using ENV variables from balenaCloud dashboard
+
+  After the download is completed user need to add an env variables using 
+  balenaCloud dashboard:
+
+  | Name                                  | Value                                                                                     |
+| ------------------------------------- | ----------------------------------------------------------------------------------------- |
+| WALLET_ADDRESS                        | Change this to your monero wallet address which you install and set
+| MINER_POOL                            | (Optional) Change this to the mining pool you want to join, default is: ```xmr.2miners.com:2222```                           |
 
 assets:
   repository:
