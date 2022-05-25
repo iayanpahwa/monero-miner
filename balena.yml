@@ -16,11 +16,8 @@ post-provisioning: >-
 
   After the download is completed user need to add an env variables using 
   balenaCloud dashboard:
-
-  | Name                                  | Value                                                                                     |
-| ------------------------------------- | ----------------------------------------------------------------------------------------- |
-| WALLET_ADDRESS                        | Change this to your monero wallet address which you install and set
-| MINER_POOL                            | (Optional) Change this to the mining pool you want to join, default is: ```xmr.2miners.com:2222```                           |
+  - WALLET_ADDRESS : Change this to your monero wallet address which you install and set
+  - MINER_POOL     : (Optional) Change this to the mining pool you want to join, default is: ```xmr.2miners.com:2222```                           |
 
 assets:
   repository:
